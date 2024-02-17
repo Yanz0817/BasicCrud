@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+</head>
+
+<body>
+  
+  <h1 class="h1">BASIC CRUD</h1>
+
+  <div class="container">
+    <div class="inputs">
+      <form action="">
+       <label for="name">Name</label>
+       <input type="" class="Field" id="name" required/>
+       <label for="age">Age</label>
+       <input type="number" class="Field" id="age" min="14" max="99" required/>
+       <label for="birthdate">Birthdate</label>
+       <input type="date" class="Field" id="birthdate" required/>   
+       <label for="course">Course</label>
+       <input type="" class="Field" id="course" required/> 
+       <input type="button" value="Add" id="button" onclick="addOnClick()"> 
+      </form>
+     </div>
+  </div>
+  
+
+  <div class="table1" >
+  <table class="content-table">
+      <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+            <th>Course</th>
+            <th>Actions</th>
+            <th></th>
+        </tr>
+    </thead>
+     <tbody id="myTable">
+
+    </tbody>
+</table>
+</div>
+  
+</body>
+
+<script>
+
+  function addOnClick(){
+    var name = document.getElementById('name').value;
+    var age = document.getElementById('age').value;
+    var birthdate = document.getElementById('birthdate').value;
+    var course = document.getElementById('course').value;
+    let students = document.getElementById("myTable").innerHTML
+    console.log(students);
+
+    let add_new =  `<tr> 
+                      <td>${name}</td>
+                      <td>${age}</td>   
+                      <td>${birthdate}</td> 
+                      <td>${course}</td>  
+                      <td><button onclick="deleteData(this)">Delete</button>
+                        <button onclick="updateData(this)">Edit</button><td>
+                          
+                  </tr>`
+
+    newStudents = students + add_new;
+
+    document.getElementById("myTable").innerHTML = newStudents
+   
+  }
+
+function updateData(stud){
+  var s = stud.parentNode.parentNode;
+  var tr = document.createElement('tr');
+
+  var td1 = tr.appendChild(document.createElement('td'));
+  var td2 = tr.appendChild(document.createElement('td'));
+  var td3 = tr.appendChild(document.createElement('td'));
+  var td4 = tr.appendChild(document.createElement('td'));
+  var td5 = tr.appendChild(document.createElement('td'));
+  
+
+  td1.innerHTML='<input type="" class="Field" id="name2" required>';
+  td2.innerHTML='<input type="" class="Field" id="age2" required>';
+  td3.innerHTML='<input type="date" class="Field" id="birthdate2" required>';
+  td4.innerHTML='<input type="" class="Field" id="course2" required>';
+  td5.innerHTML='<button onclick="updateNew(this)">Save</button>';  
+
+
+document.getElementById("myTable").replaceChild(tr, s);
+}
+
+function updateNew(stud){
+    var s = stud.parentNode.parentNode;
+    var name = document.getElementById('name2').value;
+    var age = document.getElementById('age2').value;
+    var birthdate = document.getElementById('birthdate2').value;
+    var course = document.getElementById('course2').value;
+    var tr = document.createElement('tr');
+
+  var td1 = tr.appendChild(document.createElement('td'));
+  var td2 = tr.appendChild(document.createElement('td'));
+  var td3 = tr.appendChild(document.createElement('td'));
+  var td4 = tr.appendChild(document.createElement('td'));
+  var td5 = tr.appendChild(document.createElement('td'));
+  
+
+  td1.innerHTML= name;
+  td2.innerHTML= age;
+  td3.innerHTML= birthdate;
+  td4.innerHTML= course;
+  td5.innerHTML=['<button onclick="deleteData(this)">Delete</button>' + '<button onclick="updateData(this)">Edit</button>'];
+  
+
+document.getElementById("myTable").replaceChild(tr, s);
+    
+}
+
+
+function deleteData(deldata){
+ var del = deldata.parentNode.parentNode;
+ del.parentNode.removeChild(del);
+  }
+
+</script>
+
+</html>
+
+
